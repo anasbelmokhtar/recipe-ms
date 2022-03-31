@@ -1,51 +1,77 @@
 package com.algonquin.recipebook.model;
 
-import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Generated;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "recipeName",
+        "recipeDescription",
+        "imagePath",
+        "ingredients"
+})
+@Generated("jsonschema2pojo")
 public class Recipe {
-    private int recipeId;
+
+    @JsonProperty("recipeName")
     private String recipeName;
-    private String recipeDesc;
-    private List<Ingredient> ingredients = new ArrayList<>();
+    @JsonProperty("recipeDescription")
+    private String recipeDescription;
+    @JsonProperty("imagePath")
+    private String imagePath;
+    @JsonProperty("ingredients")
+    private List<Ingredient> ingredients = null;
 
-    public int getRecipeId() {
-        return recipeId;
-    }
-
-    public void setRecipeId(int recipeId) {
-        this.recipeId = recipeId;
-    }
-
+    @JsonProperty("recipeName")
     public String getRecipeName() {
         return recipeName;
     }
 
+    @JsonProperty("recipeName")
     public void setRecipeName(String recipeName) {
         this.recipeName = recipeName;
     }
 
-    public String getRecipeDesc() {
-        return recipeDesc;
+    @JsonProperty("recipeDescription")
+    public String getRecipeDescription() {
+        return recipeDescription;
     }
 
-    public void setRecipeDesc(String recipeDesc) {
-        this.recipeDesc = recipeDesc;
+    @JsonProperty("recipeDescription")
+    public void setRecipeDescription(String recipeDescription) {
+        this.recipeDescription = recipeDescription;
     }
 
+    @JsonProperty("imagePath")
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    @JsonProperty("imagePath")
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    @JsonProperty("ingredients")
     public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
+    @JsonProperty("ingredients")
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
-    public void addIngredient(Ingredient i){
-        this.ingredients.add(i);
-    }
-
-    public void removeIngredient(Ingredient i){
-        this.ingredients.remove(i);
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "recipeName='" + recipeName + '\'' +
+                ", recipeDescription='" + recipeDescription + '\'' +
+                ", imagePath='" + imagePath + '\'' +
+                ", ingredients=" + ingredients +
+                '}';
     }
 }

@@ -1,31 +1,48 @@
 package com.algonquin.recipebook.model;
 
+import javax.annotation.Generated;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "name",
+        "amount"
+})
+@Generated("jsonschema2pojo")
 public class Ingredient {
-    private int ingredientId;
-    private String ingredientName;
-    private String ingredientDesc;
 
-    public int getIngredientId() {
-        return ingredientId;
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("amount")
+    private Integer amount;
+
+    @JsonProperty("name")
+    public String getName() {
+        return name;
     }
 
-    public void setIngredientId(int ingredientId) {
-        this.ingredientId = ingredientId;
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getIngredientName() {
-        return ingredientName;
+    @JsonProperty("amount")
+    public Integer getAmount() {
+        return amount;
     }
 
-    public void setIngredientName(String ingredientName) {
-        this.ingredientName = ingredientName;
+    @JsonProperty("amount")
+    public void setAmount(Integer amount) {
+        this.amount = amount;
     }
 
-    public String getIngredientDesc() {
-        return ingredientDesc;
-    }
-
-    public void setIngredientDesc(String ingredientDesc) {
-        this.ingredientDesc = ingredientDesc;
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "name='" + name + '\'' +
+                ", amount=" + amount +
+                '}';
     }
 }

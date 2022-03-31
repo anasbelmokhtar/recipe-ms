@@ -23,4 +23,9 @@ public class RecipeService {
     public int insertIngredient(Ingredient ingredient){
         return recipeDao.insertIngredient(ingredient);
     }
+
+    public int insertRecipes(List<Recipe> recipes) {
+        System.out.println("At the recipe service: " + recipes.toString());
+        return recipeDao.insertRecipes(recipes);
+    }
 }
