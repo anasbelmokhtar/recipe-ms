@@ -50,6 +50,7 @@ public class RecipeDao {
             Recipe recipe = new Recipe();
             recipe.setRecipeName(rs.getString("RecipeName"));
             recipe.setRecipeDescription(rs.getString("RecipeDescription"));
+            recipe.setImagePath(rs.getString("imagePath"));
 
             return recipe;
         }
@@ -57,6 +58,7 @@ public class RecipeDao {
     public List<Recipe> getRecipes() {
         String sql = "SELECT * FROM RecipeBook.Recipes";
         List<Recipe> recipes = jdbcTemplate.query(sql,new RecipeRowMapper());
+        System.out.println(recipes.get(0).toString());
         return recipes;
 
     }
