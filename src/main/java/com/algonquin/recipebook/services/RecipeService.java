@@ -13,8 +13,8 @@ public class RecipeService {
     @Autowired
     RecipeDao recipeDao;
 
-    public List<Recipe> getRecipes(){
-        return recipeDao.getRecipes();
+    public List<Recipe> getRecipes(String username){
+        return recipeDao.getRecipes(username);
     }
 
     public int insertRecipe(Recipe recipe) {

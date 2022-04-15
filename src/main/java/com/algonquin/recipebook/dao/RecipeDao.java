@@ -25,13 +25,14 @@ public class RecipeDao {
     }
 
     public int insertRecipe(Recipe recipe) {
-        String sql = "insert into RecipeBook.Recipes (RecipeName, RecipeDescription) values (?,?)";
-        int rowsAffected = jdbcTemplate.update(sql, new Object[]{recipe.getRecipeName(),recipe.getRecipeDescription()});
+        String sql = "insert into sql5485812.Recipes (RecipeName, RecipeDescription, ImagePath) values (?,?,?)";
+        int rowsAffected = jdbcTemplate.update(sql, new Object[]{recipe.getRecipeName(),recipe.getRecipeDescription(),recipe.getImagePath()});
+
         return rowsAffected;
     }
 
     public int insertIngredient(Ingredient ingredient) {
-        String sql = "insert into RecipeBook.Ingredients (IngredientName, IngredientDescription) values (?,?)";
+        String sql = "insert into sql5485812.Ingredients (IngredientName, IngredientDescription) values (?,?)";
         int rowsAffected = jdbcTemplate.update(sql, new Object[]{ingredient.getName(),ingredient.getAmount()});
         return rowsAffected;
     }
@@ -55,10 +56,13 @@ public class RecipeDao {
             return recipe;
         }
     }
-    public List<Recipe> getRecipes() {
-        String sql = "SELECT * FROM RecipeBook.Recipes";
-        List<Recipe> recipes = jdbcTemplate.query(sql,new RecipeRowMapper());
-        System.out.println(recipes.get(0).toString());
+    public List<Recipe> getRecipes(String username) {
+        String sql = "SELECT sql5485812.Recipes.RecipeName,sql5485812.Recipes.RecipeDescription, sql5485812.Recipes.ImagePath FROM sql5485812.Recipes\n" +
+                "inner join sql5485812.Recipe_Users\n" +
+                "on sql5485812.Recipes.RecipeId = sql5485812.Recipe_Users.RecipeId\n" +
+                "inner join sql5485812.Users \n" +
+                "on sql5485812.Users.UserId = sql5485812.Recipe_Users.UserId WHERE Username = ?";
+        List<Recipe> recipes = jdbcTemplate.query(sql,new RecipeRowMapper(), username);
         return recipes;
 
     }
@@ -68,7 +72,7 @@ public class RecipeDao {
         List<List<Recipe>> batchLists = Lists.partition(recipes, batchSize);
 
         for(List<Recipe> batch : batchLists) {
-            this.jdbcTemplate.batchUpdate("insert into RecipeBook.Recipes (RecipeName, RecipeDescription,imagePath) values (?,?,?)", new BatchPreparedStatementSetter() {
+            this.jdbcTemplate.batchUpdate("insert into sql5485812.Recipes (RecipeName, RecipeDescription,ImagePath) values (?,?,?)", new BatchPreparedStatementSetter() {
                 @Override
                 public void setValues(PreparedStatement ps, int i)
                         throws SQLException {
