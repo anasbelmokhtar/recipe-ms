@@ -38,9 +38,9 @@ public class RecipeBookController {
 
     //@CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/recipe-book/insert-recipes")
-    public int insertRecipes(@RequestBody List<Recipe> recipes){
+    public int insertRecipes(@RequestParam String username, @RequestBody List<Recipe> recipes){
         System.out.println("At the recipe controller: " + recipes.toString());
-        return recipeService.insertRecipes(recipes);
+        return recipeService.insertRecipes(recipes, username);
     }
 
 }
